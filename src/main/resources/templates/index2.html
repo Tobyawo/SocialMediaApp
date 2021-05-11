@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8"/>
+  <title>Product Manager</title>
+</head>
+<body>
+
+<div align="center">
+  <h1>Product List</h1>
+  <a href="new2">Add New User</a>
+  <a href="/fbhome">FACEBOOK PAGE</a>
+  <br/><br/>
+  <table border="1" cellpadding="10">
+    <thead>
+    <tr>
+      <th>UserId</th>
+      <th>First Name</th>
+      <th>Last name</th>
+      <th>Email</th>
+      <th>password</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${listUsers}">
+      <td th:text="${user.userid}">User ID</td>
+      <td th:text="${user.firstname}">FirstName</td>
+      <td th:text="${user.lastname}">Last Name</td>
+      <td th:text="${user.email}">email</td>
+      <td th:text="${user.password}">Password</td>
+      <td>
+        <a th:href="@{'/edit2/' + ${user.userid}}">Edit</a>
+        &nbsp;&nbsp;&nbsp;
+        <a th:href="@{'/delete2/' + ${user.userid}}">Delete</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <a href="/fbnew">Go To FaceBook</a>
+</div>
+
+
+
+</body>
+</html>
