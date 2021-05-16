@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 
-@NoArgsConstructor // covers for no arguments constructors
-@AllArgsConstructor // covers for all arguments constructors
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Entity
 

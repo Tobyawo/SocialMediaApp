@@ -33,7 +33,7 @@ public class PostController {
 
     @RequestMapping("/facebookHome")
     public ModelAndView viewHomePage(Model model, HttpSession httpSession) {
-        ModelAndView mav = new ModelAndView("facebookHome");
+        ModelAndView mav = new ModelAndView("fbindex");
         User user = (User) httpSession.getAttribute("user");
         mav.addObject("user",user);
         // post object to accept post attribute is available on the facebook home page
@@ -43,8 +43,6 @@ public class PostController {
         List<Post> listPosts = postservice.listAll();
         mav.addObject("listPosts",listPosts);
 
-
-//        System.out.println(listPosts);
         Comment comment = new Comment();
         mav.addObject("comment",comment);
         PostLike postLike = new PostLike();
@@ -67,7 +65,7 @@ public class PostController {
 
     @RequestMapping("/editPost/{postId}")
     public ModelAndView showEditPostPage(@PathVariable(name = "postId") long postId) {
-        ModelAndView mav = new ModelAndView("Post_editing");
+        ModelAndView mav = new ModelAndView("Post_edit2");
         Post post = postservice.get(postId);
         mav.addObject("post", post);
         List<Post> listPosts = postservice.listAll();

@@ -48,16 +48,13 @@ public class CommentController {
 
 
 
-
-
     @RequestMapping("/editComment/{postId}/{commentId}")
     public ModelAndView showEditCommentPage(@PathVariable(name = "postId") long postId, @PathVariable(name = "commentId") long commentId,Model model) {
-        ModelAndView mav = new ModelAndView("Comment_editing");
+        ModelAndView mav = new ModelAndView("Comment_edit2");
         Post post = postService.getPostById(postId);
         mav.addObject("post",post);
         mav.addObject("commentId",commentId);
         Comment comment = commentservice.get(commentId);
-        System.out.println("postid = "+ postId+ "commentId = "+ commentId);
         mav.addObject("comment", comment);
         return mav;
     }
@@ -69,8 +66,6 @@ public class CommentController {
 
     @RequestMapping("/deleteComment/{commentId}")
     public String deleteComment(@PathVariable(name = "commentId") Long commentId) {
-        System.err.println("i got to dele" + commentId);
-        System.out.println("enters herreeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
         commentservice.delete(commentId);
         return "redirect:/facebookHome";
     }

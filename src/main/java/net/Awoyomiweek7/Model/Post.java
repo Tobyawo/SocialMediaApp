@@ -30,7 +30,7 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)//,orphanRemoval = true) // one post to many comment
+    @OneToMany(mappedBy = "post",cascade=CascadeType.ALL, fetch = FetchType.EAGER)  // one post to many comment
     private Set<Comment> comments;
 
     @OneToMany(mappedBy="post", cascade=CascadeType.ALL)

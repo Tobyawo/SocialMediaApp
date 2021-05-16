@@ -12,11 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor // covers for all arguments constructors
 @Data
 @Entity
-@Table(name = "PostLikes")
+@Table(name = "likes")
 public class PostLike {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long likeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 //
 //    @Column(nullable = false)
 //    private int likes;
@@ -34,7 +34,7 @@ public class PostLike {
     @Override
     public String toString() {
         return "PostLike{" +
-                "likeId=" + likeId +
+                "likeId=" + id +
                 ", post=" + post +
                 ", user=" + user +
                 '}';

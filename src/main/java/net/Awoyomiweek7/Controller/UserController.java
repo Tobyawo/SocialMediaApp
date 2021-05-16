@@ -31,8 +31,8 @@ import javax.servlet.http.HttpSession;
 
 
 //2
-	@RequestMapping(value = "/loginPost", method= RequestMethod.POST) // this is the post method that handle submitted form to the login up form
-	public String checkUserlogin(@ModelAttribute("user") User user, Model model, HttpSession httpSession) { 	// collect the model attribute users and map it into the user  in this parameter
+	@RequestMapping(value = "/loginPost", method= RequestMethod.POST)
+	public String checkUserlogin(@ModelAttribute("user") User user, Model model, HttpSession httpSession) {
 		User user1 = service.getUserByEmail(user.getEmail());
 		if (user1 == null) {
 			model.addAttribute("invalid", "User does not exist. check login details or register.");
@@ -47,9 +47,9 @@ import javax.servlet.http.HttpSession;
 		return "redirect:/facebookHome";
 	}
 
-	@GetMapping("/signUp")  // when a request link to signup page is clicked on. it come here
+	@GetMapping("/signUp")
 	public String showSignUpForm(Model model) {
-		User user = new User(); // A User object to represent the information in the form.
+		User user = new User();
 		model.addAttribute("user", user);
 
 		List<String> listGender = Arrays.asList("Male", "Female"); //a List of Gender that will be used to display a select box/dropdown list in the form.
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpSession;
 		return "SignUpPage";
 	}
 
-	@PostMapping("/handleSignUp") // this is the post method that handle submitted form from the sign up form
+	@PostMapping("/handleSignUp")
 	public String submitSignUpForm(@ModelAttribute("user") User user) {
 		service.save(user);
 

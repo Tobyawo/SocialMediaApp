@@ -1,16 +1,11 @@
 package net.Awoyomiweek7.Service;
-import net.Awoyomiweek7.Model.Comment;
 import net.Awoyomiweek7.Model.Post;
-import net.Awoyomiweek7.Model.Product;
 import net.Awoyomiweek7.Model.User;
 import net.Awoyomiweek7.Repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 @Service
