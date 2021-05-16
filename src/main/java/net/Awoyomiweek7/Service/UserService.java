@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository user2Repository;
-    public List<User> listAll(){return user2Repository.findAll();}
+
 
     public void save(User user) { user2Repository.save(user);
     }

@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
 
 //2
 	@RequestMapping(value = "/loginPost", method= RequestMethod.POST) // this is the post method that handle submitted form to the login up form
-	public String checkUserlogin(@ModelAttribute("user") User user, Model model, HttpSession httpSession) {
+	public String checkUserlogin(@ModelAttribute("user") User user, Model model, HttpSession httpSession) { 	// collect the model attribute users and map it into the user  in this parameter
 		User user1 = service.getUserByEmail(user.getEmail());
 		if (user1 == null) {
 			model.addAttribute("invalid", "User does not exist. check login details or register.");
@@ -44,22 +44,8 @@ import javax.servlet.http.HttpSession;
 			return "loginPage";
 		}
 		httpSession.setAttribute("user", user1);
-		return "redirect:/Home";
+		return "redirect:/facebookHome";
 	}
-
-
-
-	@GetMapping("/Home")
-	public String goHomePage(Model model, HttpSession httpSession){
-		User user = (User) httpSession.getAttribute("user");
-	//	model.addAttribute("newPost", new Post());
-		model.addAttribute("user", user);
-//		model.addAttribute("allPosts", postService.findAllOrderByPostIDDesc());
-		return "fbindex";
-
-	}
-
-
 
 	@GetMapping("/signUp")  // when a request link to signup page is clicked on. it come here
 	public String showSignUpForm(Model model) {
@@ -81,44 +67,5 @@ import javax.servlet.http.HttpSession;
 		return "loginPage";
 	}
 
-
-
-	@RequestMapping("/b")
-	public String viewHomePage2(Model model) {
-		ModelAndView modelAndView = new ModelAndView("loginPage");
-		List<User> listUsers = service.listAll();
-		modelAndView.addObject("listUsers",listUsers);
-		model.addAttribute("listUsers", listUsers);
-		return "loginPage";
-
-	}
-
-	@RequestMapping("/new2")
-	public String showNewProductPage(Model model) {
-		User user = new User();
-		model.addAttribute("user", user);
-		return "new_User2";
-	}
-
-	@RequestMapping(value = "/save2", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("user") User user, Model model) {
-		service.save(user);
-		return "redirect:/b";
-	}
-
-	@RequestMapping("/edit2/{userid}")
-	public ModelAndView showEditProductPage(@PathVariable(name = "userid") long userid) {
-		ModelAndView mav = new ModelAndView("signUpPage");
-		User user = service.get(userid);
-		mav.addObject("user", user);
-
-		return mav;
-	}
-
-	@RequestMapping("/delete2/{userid}")
-	public String deleteProduct(@PathVariable(name = "userid") long userid) {
-		service.delete(userid);
-		return "redirect:/b";
-	}
 
 }

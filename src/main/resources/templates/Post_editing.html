@@ -364,7 +364,7 @@
                     <div class="navbar-header">
                         <%--						--%>
                     </div>
-                    <button type="submit" value="logout" class="btn text-right"> <a href="/">Log Out</a></button><p></p>
+                    <button type="submit" value="logout" class="btn text-right"> <a href="index.jsp">Log Out</a></button><p></p>
 
                 </div>
                 <!-- /top nav -->
@@ -397,78 +397,57 @@
                                     <form class="form-horizontal"  th:action="@{/savePost}" th:object="${post}" role="form"  method="post">
                                         <h4>What's on your mind?</h4>
                                         <div class="form-group" style="padding:14px;">
-                                            <textarea type="postContent"  field="*{postContent}" class="form-control" name="postContent" placeholder="Enter your post" required="required"></textarea>
-                                            <button class="btn btn-primary pull-right" type="submit">Post</button>
+                                            <input type="hidden" th:field="*{postId}" readonly="readonly" />
+                                            <textarea type="postContent"  field="*{postContent}" class="form-control" name="postContent" placeholder= <h5 th:text = "${post.postContent}"></textarea>
+                                            <button class="btn btn-primary pull-right" type="submit">Resend edited post</button>
                                         </div>
                                     </form>
                                 </div>
 
 
-                               <div th:each="post: ${listPosts}">
-                                    <br>
-                                <div class="well">
-                                    <div class="panel-heading">
-                                        <h4>Posts</h4>
+<!--                                <tr th:each="post: ${listPosts}">-->
+<!--                                    <div class="well">-->
+<!--                                        <div class="panel-heading">-->
+<!--                                            <h4>Posts</h4>-->
+<!--                                            &lt;!&ndash;                                        <h3 th:text ="${post.getUser().lastname} + ' ' + ${post.getUser().firstname}">  </h3>&ndash;&gt;-->
+<!--                                        </div>-->
+<!--                                        <div class="panel-body">-->
+<!--                                            <div class="list-group">-->
+<!--                                                <h5 th:text = "${post.postContent}"> </h5>-->
+<!--                                            </div>-->
+<!--                                            <a class="btn btn-primary pull-left btn-sm" th:href="@{'/deletePost/' + ${post.postId}}"/>delete post</a>-->
+<!--                                            <a class="btn btn-primary pull-left btn-sm" href=""/>like post</a>-->
 
-<!--                                        <h5 th:text ="${post.getUser().lastname} + ' ' + ${post.getUser().firstname}">  </h5>-->
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="panel-body">
-                                        <div class="list-group" >
-                                            <h5 th:text ="${post.getUser().getFirstname()}">  </h5>
-                                            <h5 th:text = "${post.postContent}"> </h5>
-                                        </div>
-                                        </div>
-                                        <br>
-                                        <br>
-                                        <a class="btn btn-primary pull-left btn-sm" th:href="@{'/deletePost/' + ${post.postId}}"/>delete post</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                            <a th:href="@{'/editPost/' + ${post.postId}}"><button class="btn btn-primary pull-right" type="submit">Edit post</button></a>-->
 
-                                        <a  th:href="@{'/savePostLikes/' + ${post.postId}}" class="btn btn-primary pull-left btn-sm"/>like post</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                                            &lt;!&ndash;                                        <h3 th:text ="${user.firstname} + ' ' + ${user.lastname}">  </h3>&ndash;&gt;-->
 
-                                        <a th:href="@{'/editPost/' + ${post.postId}}"><button class="btn btn-primary pull-right btn-sm" type="submit">Edit post</button></a>
-
-                                        <br>
-                                        <br>
-
-                                        <div th:each="comment: ${post.getComments()}">
-                                            <h3 th:text ="${user.firstname} + ' ' + ${user.lastname}">  </h3>
-                                            <h5 th:text = "${comment.getComments()}"> </h5>
-
-                                    <div  class="panel-body" >
-                                        <div class="list-group">
-                                        </div>
-                                        <a class="btn btn-primary pull-left btn-sm" th:href="@{'/deleteComment/' + ${comment.getCommentId()}}"/>delete comment</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <a class="btn btn-primary pull-left btn-sm" href=""/>like comment</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <a th:href="@{'/editComment/' + ${post.postId} +'/'+ ${comment.getCommentId()}}"><button class="btn btn-primary pull-right btn-sm" type="submit">Edit comment</button></a>
-<br>
-                                        <br>
-                                    </div>
+<!--                                        </div>-->
+<!--                                        <div class="panel-body">-->
+<!--                                            <div class="list-group">-->
+<!--                                                <p>comment body will be here</p>-->
+<!--                                            </div>-->
 
 
-                                        <br>
-                                        <br>
 
-                                    </div>
-                                    </div>
+<!--                                            <form action="create_comment" method="post">-->
+<!--                                                <div class="input-group mb-3">-->
+<!--                                                    <input type="text" class="form-control" placeholder="type your comment here comment"-->
+<!--                                                           name="comment" aria-label="comment" aria-describedby="button-addon2">-->
+<!--                                                    <div class="input-group-append">-->
+<!--                                                        <button class="btn btn-primary" type="submit" id="button-addon2"> Post Comment</button>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                            </form>-->
+<!--                                            <a class="btn btn-primary pull-left btn-sm" th:href="@{'/deletePost/' + ${post.postId}}"/>delete comment</a>-->
+<!--                                            <a class="btn btn-primary pull-left btn-sm" href=""/>like comment</a>-->
 
-
-                               </div>
-                                   <form class="form-horizontal"  th:action="@{|/saveComment/${post.postId}|}" th:object="${comment}" role="form"  method="post">
-                                       <div class="input-group mb-3">
-                                           <input type="text" class="form-control" th:field="*{comments}" placeholder="type your comment here comment" name="comment" aria-label="comment" aria-describedby="button-addon2">
-                                           <div class="input-group-append">
-                                               <button class="btn btn-primary" type="submit" id="button-addon2"> Post Comment</button>
-                                           </div>
-                                       </div>
-                                   </form>
-                               </div>
-                            </div>
-
-
-                            <br>
-<!--                            close of posts foreach loop-->
+<!--                                            <a th:href="@{'/editPost/' + ${post.postId}}"><button class="btn btn-primary pull-right" type="submit">Edit comment</button></a>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                            </div>-->
+<!--                            </tr>-->
+                            <!--                            close of posts foreach loop-->
                             <!--                            </c:forEach>-->
 
 

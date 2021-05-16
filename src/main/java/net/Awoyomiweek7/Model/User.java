@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(name="user2")
+@Entity
+@Table(name = "users")
 public class User {
     private Long userid;
     private String firstname;
@@ -73,16 +74,23 @@ public class User {
 
 
 
+    //ERD -- Entity Relationship Diagram
+//    the best way to model a one-to-many relationship is to use just @ManyToOne annotation on the child entity.
+//    The second best way is to define a bidirectional association with a @OneToMany annotation on the parent side
+//    of the relationship and a @ManyToOne annotation on the child side of the relationship. The bidirectional mapping has
+//    its pros and cons. I’ll demonstrate these pros and cons in the second section of this article. I’ll also tell you when
+//    a bidirectional mapping is a good fit.
+
+
+        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)    // Defining the relationship: Mapping One User to many Post relationship
+        private List<Post> post;
+
 
         @OneToMany    // Defining the relationship: Mapping One User to many Post relationship
-        private List<Post> post =new ArrayList<>();
-
-
-        @OneToMany    // Defining the relationship: Mapping One User to many Post relationship
-        private List<Comment> comment =new ArrayList<>();
+        private List<Comment> comment;
 
         @OneToMany    // Defining the relationship: Mapping One User to many Post relationship
-        private List<PostLike> postLike =new ArrayList<>();
+        private List<PostLike> postLike;
 
         @OneToMany    // Defining the relationship: Mapping One User to many Post relationship
         private List<CommentLike> commentLike =new ArrayList<>();
